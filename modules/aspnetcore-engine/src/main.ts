@@ -1,6 +1,6 @@
 import { Type, NgModuleFactory, CompilerFactory, Compiler } from '@angular/core';
 import { platformDynamicServer } from '@angular/platform-server';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { ResourceLoader } from '@angular/compiler';
 
 import { REQUEST, ORIGIN_URL } from './tokens';
@@ -129,7 +129,7 @@ export function ngAspnetCoreEngine(options: IEngineOptions): Promise<IEngineRend
         .then(factory => {
           return renderModuleFactory(factory, {
             document: options.appSelector,
-            url: options.request.url,
+            url: options.request.absoluteUrl,
             extraProviders: extraProviders
           });
         })
